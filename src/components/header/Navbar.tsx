@@ -13,14 +13,13 @@ export default function NavBar() {
     <Box
       sx={{
         display: "flex",
-        bgcolor: "red",
       }}
     >
       <AppBar
         position="static"
         sx={{
           display: "flex",
-          //   bgcolor: "violet",
+          background:"#21a3ba"
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-evenly" }}>

@@ -13,7 +13,7 @@ import { Person, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import React from "react";
 import LoginFooter from "@/components/footer/LoginFooter";
-import SocialLogins from "@/components/footer/SocialLogins";
+import SocialIcons from "@/components/footer/SocialIcons";
 
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -238,7 +238,7 @@ export default function Login() {
               padding: "50px 30px",
             }}
           >
-            <SocialLogins />
+            <SocialIcons />
           </Box>
         </Box>
       </Box>

@@ -2,20 +2,17 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { LinkedIn, Twitter, Instagram, Telegram } from "@mui/icons-material";
+import SocialIcons from "./SocialIcons";
 
 const Footer = () => {
   return (
     <Box
       sx={{
         padding: "10px",
-        color: "#fff",
-        // position: "absolute",
-        // bottom: "1px",
         width: "100%",
-        //bgcolor: "red",
+        background: "#1976D2",
       }}
     >
-      <hr />
       <Box
         sx={{
           padding: "10px",
@@ -31,12 +28,11 @@ const Footer = () => {
         sx={{
           display: "flex",
           gap: "20px",
+          justifyContent: "end",
+          color: "#fff",
         }}
       >
-        <LinkedIn />
-        <Twitter />
-        <Instagram />
-        <Telegram />
+        <SocialIcons />
       </Box>
     </Box>
   );

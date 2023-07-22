@@ -1,7 +1,7 @@
 import React from "react";
 import { LinkedIn, Twitter, Instagram, Telegram } from "@mui/icons-material";
 
-const SocialLogins = () => {
+const SocialIcons = () => {
   return (
     <>
       <LinkedIn />
@@ -12,4 +12,4 @@ const SocialLogins = () => {
   );
 };
 
-export default SocialLogins;
+export default SocialIcons;
