@@ -20,7 +20,7 @@ const Collections = () => {
       </Typography>
       <BookCollections />
       <VideoCollections />
-      <LearningCollections/>
+      {/* <LearningCollections /> */}
     </Box>
   );
 };

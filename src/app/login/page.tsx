@@ -9,14 +9,32 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Person, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  Person,
+  Lock,
+  Visibility,
+  VisibilityOff,
+  Google,
+} from "@mui/icons-material";
 import { motion } from "framer-motion";
 import React from "react";
 import LoginFooter from "@/components/footer/LoginFooter";
 import SocialIcons from "@/components/footer/SocialIcons";
+import { useRouter } from "next/navigation";
+import { useFormik } from "formik";
+import { loginValidate } from "@/lib/validate";
+
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
+
+  const router = useRouter();
+
+  const handleSignIn = async () => {
+    await signIn("google", { callbackUrl: "/" });
+  };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -25,6 +43,33 @@ export default function Login() {
   ) => {
     event.preventDefault();
   };
+
+  //Formik and Login Validation
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validate: loginValidate,
+    onSubmit,
+  });
+  async function onSubmit(values: any) {
+    try {
+      const res = await signIn("credentials", {
+        username: values.username,
+        password: values.password,
+        redirect: false,
+      });
+      if (res?.ok) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log("Login issue", err);
+    }
+
+    // console.log("username", values.username);
+    // console.log("password", values.password);
+  }
   return (
     <Box
       sx={{
@@ -91,12 +136,13 @@ export default function Login() {
             <Box>Error: Invalid Credentials</Box>
             <Box
               component="form"
+              onSubmit={formik.handleSubmit}
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "30px",
+                // justifyContent: "center",
+                // alignItems: "center",
+                gap: "10px",
               }}
             >
               <motion.div
@@ -109,7 +155,7 @@ export default function Login() {
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "10px",
+                    gap: "7px",
                   }}
                 >
                   <Box
@@ -130,10 +176,23 @@ export default function Login() {
                       variant="outlined"
                       type="text"
                       placeholder="Username / E-mail"
+                      {...formik.getFieldProps("username")}
                     />
                   </FormControl>
                 </Box>
               </motion.div>
+              {formik.touched.username && formik.errors.username ? (
+                <Box
+                  component="span"
+                  sx={{
+                    color: "red",
+                  }}
+                >
+                  {formik.errors.username}
+                </Box>
+              ) : (
+                ""
+              )}
 
               <motion.div
                 initial={{ opacity: 0, y: +50 }}
@@ -165,6 +224,7 @@ export default function Login() {
                     <OutlinedInput
                       type={showPassword ? "text" : "password"}
                       placeholder="Password"
+                      {...formik.getFieldProps("password")}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -181,11 +241,21 @@ export default function Login() {
                   </FormControl>
                 </Box>
               </motion.div>
+              {formik.touched.password && formik.errors.password ? (
+                <Box
+                  component="span"
+                  sx={{
+                    color: "red",
+                  }}
+                >
+                  {formik.errors.password}
+                </Box>
+              ) : (
+                ""
+              )}
 
               <motion.div
                 style={{
-                  display: "flex",
-                  justifyContent: "end",
                   width: "100%",
                 }}
                 initial={{ opacity: 0, y: -50 }}
@@ -194,10 +264,13 @@ export default function Login() {
                 transition={{ duration: 0.5 }}
               >
                 <Button
+                  type="submit"
                   variant="contained"
                   sx={{
                     background: "#21a3ba",
-                    alignItems: "end",
+                    padding: "10px",
+                    fontWeight: "bold",
+                    width: "100%",
                     "&:hover": {
                       background: "#22c3be",
                     },
@@ -205,6 +278,48 @@ export default function Login() {
                 >
                   Login
                 </Button>
+                <Typography
+                  sx={{
+                    alignItems: "end",
+                    fontWeight: "semi-bold",
+                    marginTop: "15px",
+                    textAlign: "center",
+                  }}
+                >
+                  (OR)
+                </Typography>
+              </motion.div>
+              <motion.div
+                style={{
+                  width: "100%",
+                }}
+                initial={{ opacity: 0, y: +50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Button
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                    textTransform: "capitalize",
+                    padding: "10px",
+                    fontWeight: "bold",
+                  }}
+                  onClick={handleSignIn}
+                >
+                  <Google /> &nbsp; Sign in with Google
+                </Button>
+                <Typography
+                  sx={{
+                    alignItems: "end",
+                    fontWeight: "semi-bold",
+                    marginTop: "15px",
+                    textAlign: "center",
+                  }}
+                >
+                  New here ? <Link href="/register">Sign Up </Link>
+                </Typography>
               </motion.div>
             </Box>
           </Box>

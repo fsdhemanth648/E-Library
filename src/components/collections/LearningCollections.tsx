@@ -19,7 +19,7 @@ const LearningCollections = () => {
         >
           Learn
         </Typography>
-        <MultiCarousel />
+        {/* <MultiCarousel /> */}
         <Box
           sx={{
             display: "flex",

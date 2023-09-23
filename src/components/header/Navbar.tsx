@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -5,10 +7,25 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-
-const navItems = ["Home", "Books", "Videos", "Learnings", "About", "Contact"];
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { navItems } from "@/utils/constants/dataConstants";
 
 export default function NavBar() {
+  const { status } = useSession();
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    signOut();
+    router.push("/");
+  };
+
+  const handleSignIn = () => {
+    router.push("/login");
+  };
+
   return (
     <Box
       sx={{
@@ -19,7 +36,7 @@ export default function NavBar() {
         position="static"
         sx={{
           display: "flex",
-          background:"#21a3ba"
+          background: "#21a3ba",
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-evenly" }}>
@@ -47,23 +64,38 @@ export default function NavBar() {
               }}
             >
               {navItems.map((item) => (
-                <Button
-                  key={item}
-                  sx={{
-                    color: "#fff",
-                    paddingX: "15px",
-                    textTransform: "none",
-                    fontSize: "18px",
-                  }}
-                >
-                  {item}
-                </Button>
+                <Link href={item.url} key={item.id}>
+                  <Button
+                    sx={{
+                      color: "#fff",
+                      paddingX: "15px",
+                      textTransform: "none",
+                      fontSize: "18px",
+                    }}
+                  >
+                    {item.title}
+                  </Button>
+                </Link>
               ))}
             </Box>
           </Box>
-          <Button color="inherit" variant="outlined">
-            Login
-          </Button>
+          {status === "authenticated" ? (
+            <Box>
+              <Button
+                color="inherit"
+                variant="outlined"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </Button>
+            </Box>
+          ) : (
+            <Box>
+              <Button color="inherit" variant="outlined" onClick={handleSignIn}>
+                Sign In
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

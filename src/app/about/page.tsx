@@ -2,8 +2,10 @@
 import SocialIcons from "@/components/footer/SocialIcons";
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const About = () => {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -100,6 +102,7 @@ const About = () => {
               textTransform: "capitalize",
               fontSize: "18px",
             }}
+            onClick={() => router.push("/contact")}
           >
             Contact Us
           </Button>

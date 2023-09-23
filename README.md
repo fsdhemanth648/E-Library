@@ -32,3 +32,59 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+// const handleSubmit = async (e: any) => {
+// e.preventDefault();
+
+// if (!username || !password || !cpassword) {
+// setMessage("All fields are necessary");
+// return;
+// }
+// try {
+// const userExistsRes = await fetch("api/userExists", {
+// method: "POST",
+// headers: {
+// "Content-Type": "application/json",
+// },
+// body: JSON.stringify({
+// username,
+// }),
+// });
+
+// const { user } = await userExistsRes.json();
+
+// if (user) {
+// setMessage("User Already Exists");
+// return;
+// }
+
+// const res = await fetch("api/register", {
+// method: "POST",
+// headers: {
+// "Content-Type": "application/json",
+// },
+// body: JSON.stringify({
+// username,
+// // email,
+// password,
+// }),
+// });
+// if (res.ok) {
+// setUsername("");
+// setPassword("");
+// setCPassword("");
+// setMessage("User Registered Successfully");
+// router.push("/Register");
+// } else {
+// setMessage("User Registration Failed");
+// }
+// } catch (err) {
+// console.log("Error during registration", err);
+// }
+// };
+
+// const handleMouseDownPassword = (
+// event: React.MouseEvent<HTMLButtonElement>
+// ) => {
+// event.preventDefault();
+// };
