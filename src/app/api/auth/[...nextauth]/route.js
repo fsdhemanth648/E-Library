@@ -61,7 +61,7 @@ const authOptions = {
                     const googleUserExists = await googleUser.findOne({ email });
 
                     if (!googleUserExists) {
-                        const res = await fetch("http://localhost:3000/api/googleUser", {
+                        const res = await fetch("/api/googleUser", {
                             method: 'POST',
                             headers: {
                                 "Content-Type": "application/json",

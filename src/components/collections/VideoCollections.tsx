@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import MultiCarousel from "../carousel/MultiCarousel";
 import { Video } from "../../../interfaces";
 import { useRouter } from "next/navigation";
+import { getAllVideos } from "@/lib/getAllData";
 
 const VideoCollections = () => {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -12,20 +13,21 @@ const VideoCollections = () => {
   const router = useRouter();
 
   useEffect(() => {
-    async function fetchVideos() {
+    const fetchVideos = async () => {
       try {
-        const response = await fetch("/api/videos");
-        const data = await response.json();
-        if (response.ok) {
+        const response = await getAllVideos();
+        if (response) {
+          setVideos(response);
           setIsLoading(false);
-          setVideos(data.videos);
         } else {
-          console.error(data.message);
+          console.error("Failed to fetch videos");
+          setIsLoading(false);
         }
       } catch (error) {
-        console.error("An error occurred:", error);
+        console.error("Error while fetching videos:", error);
+        setIsLoading(false);
       }
-    }
+    };
 
     fetchVideos();
   }, []);
@@ -63,6 +65,17 @@ const VideoCollections = () => {
           >
             Videos
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "10px 10px",
+            }}
+          >
+            <Typography variant="h5">
+              For better experience click on the link
+            </Typography>
+          </Box>
           <MultiCarousel data={videos} type="videos" />
           <Box
             sx={{

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import MultiCarousel from "../carousel/MultiCarousel";
 import { Book } from "../../../interfaces";
 import { useRouter } from "next/navigation";
+import { getAllBooks } from "@/lib/getAllData";
 
 const BookCollections = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -12,20 +13,21 @@ const BookCollections = () => {
   const router = useRouter();
 
   useEffect(() => {
-    async function fetchBooks() {
+    const fetchBooks = async () => {
       try {
-        const response = await fetch("/api/books");
-        const data = await response.json();
-        if (response.ok) {
+        const response = await getAllBooks();
+        if (response) {
+          setBooks(response);
           setIsLoading(false);
-          setBooks(data.books);
         } else {
-          console.error(data.message);
+          console.error("Failed to fetch books");
+          setIsLoading(false);
         }
       } catch (error) {
-        console.error("An error occurred:", error);
+        console.error("Error while fetching books:", error);
+        setIsLoading(false);
       }
-    }
+    };
 
     fetchBooks();
   }, []);

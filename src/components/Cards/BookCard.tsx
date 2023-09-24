@@ -41,7 +41,7 @@ const BookCard: React.FC<BookProps> = ({ book }) => {
   const { title, category, sub_category, coverPageUrl, bookUrl, author } = book;
   return (
     <>
-      <Link href={bookUrl}>
+      <Link href={bookUrl} target="_blank">
         <Box
           sx={{
             border: "1px solid #000",

@@ -2,18 +2,9 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Book, Video } from "../../../interfaces";
 import BookCard from "../Cards/BookCard";
 import { carouselResponsive } from "@/utils/designConstants";
 import VideoCard from "../Cards/VideoCard";
-
-interface BookListProps {
-  data: Book[];
-}
-
-interface VideoListProps {
-  videos: Video[];
-}
 
 const MultiCarousel = (props: { data: any; type: any }) => {
   const { data, type } = props;
@@ -23,7 +14,6 @@ const MultiCarousel = (props: { data: any; type: any }) => {
 
   return (
     <div>
-      {/* {JSON.stringify(data)} */}
       {type === "books" ? (
         <Carousel responsive={carouselResponsive}>
           {data.map((book, index) => (
