@@ -1,5 +1,4 @@
 "use client";
-import type { Metadata } from "next";
 import {
   Box,
   Button,
@@ -26,11 +25,6 @@ import { useFormik } from "formik";
 import { loginValidate } from "@/lib/validate";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "E-Library: Login",
-  description: "...",
-};
 
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);

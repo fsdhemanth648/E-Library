@@ -6,13 +6,6 @@ import Collections from "@/components/collections/Collections";
 import Testimonials from "@/components/testimonials/Testimonials";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import type { Metadata } from "next";
-import { Suspense } from "react";
-
-export const metadata: Metadata = {
-  title: "E-Library: Home",
-  description: "It's a place where you find the all resources at free of Cost",
-};
 
 export default function Home() {
   const { status, data: session } = useSession();
