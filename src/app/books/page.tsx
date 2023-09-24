@@ -74,7 +74,7 @@ function Books() {
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
               {books.map((book, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
+                <Grid item xs={6} sm={4} md={4} key={index}>
                   <Box sx={{ minWidth: 275 }}>
                     <Card variant="outlined">
                       <CardContent>

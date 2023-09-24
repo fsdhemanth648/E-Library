@@ -53,7 +53,6 @@ export default function Register() {
   });
 
   async function onSubmit(values: any) {
-    //console.log("jjjj", values);
     try {
       const userExistsRes = await fetch("api/userExists", {
         method: "POST",
@@ -180,12 +179,9 @@ export default function Register() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                // justifyContent: "center",
-                // alignItems: "center",
                 gap: "20px",
               }}
               onSubmit={formik.handleSubmit}
-              // onSubmit={handleSubmit}
             >
               {/* Username */}
               <motion.div
@@ -218,12 +214,7 @@ export default function Register() {
                     <TextField
                       variant="outlined"
                       type="text"
-                      //name="usernmae"
                       placeholder="Username"
-                      //value={username}
-                      // onChange={(e) => {
-                      //   setUsername(e.target.value);
-                      // }}
                       {...formik.getFieldProps("username")}
                     />
                   </FormControl>
@@ -273,12 +264,7 @@ export default function Register() {
                     <TextField
                       variant="outlined"
                       type="text"
-                      //name="usernmae"
                       placeholder="E-mail"
-                      //value={username}
-                      // onChange={(e) => {
-                      //   setUsername(e.target.value);
-                      // }}
                       {...formik.getFieldProps("email")}
                     />
                   </FormControl>
@@ -328,10 +314,6 @@ export default function Register() {
                     <OutlinedInput
                       type={showPassword ? "text" : "password"}
                       placeholder="Password"
-                      // value={password}
-                      // onChange={(e) => {
-                      //   setPassword(e.target.value);
-                      // }}
                       {...formik.getFieldProps("password")}
                       endAdornment={
                         <InputAdornment position="end">
@@ -403,10 +385,6 @@ export default function Register() {
                     <OutlinedInput
                       type={showPassword ? "text" : "password"}
                       placeholder="Confirm Password"
-                      // value={cpassword}
-                      // onChange={(e) => {
-                      //   setCPassword(e.target.value);
-                      // }}
                       {...formik.getFieldProps("cpassword")}
                       endAdornment={
                         <InputAdornment position="end">

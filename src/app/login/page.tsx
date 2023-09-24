@@ -65,9 +65,6 @@ export default function Login() {
     } catch (err) {
       console.log("Login issue", err);
     }
-
-    // console.log("username", values.username);
-    // console.log("password", values.password);
   }
   return (
     <Box
@@ -132,15 +129,12 @@ export default function Login() {
             >
               Login
             </Typography>
-            <Box>Error: Invalid Credentials</Box>
             <Box
               component="form"
               onSubmit={formik.handleSubmit}
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                // justifyContent: "center",
-                // alignItems: "center",
                 gap: "10px",
               }}
             >
